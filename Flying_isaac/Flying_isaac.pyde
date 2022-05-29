@@ -19,11 +19,11 @@ y3=400
 y4 = 0
 x4=0
 vertical=0
-game = 1
+game = 0
 def setup():
     global people, bg, barrier , y,bg2, game
     size(800,800)
-    url = "https://static.wikia.nocookie.net/bindingofisaac/images/7/78/Isaac_Fate.png"
+    url = " "
     people = loadImage(url, "png")
     url2= "https://cdn.dribbble.com/users/2208405/screenshots/10344568/media/c8d261e7fbe2739731b99a731801d90a.png"
     bg= loadImage(url2, "png")
@@ -33,13 +33,13 @@ def setup():
 def draw():
     global x, y, bg, vertical, barrier,people, x2, x3, y3, game
     if game == 0:
-        
+        imageMode(CENTER)
         background(0)
         image(bg,x2,0)
         image(bg2,x2+bg.width, 0)
         image(people, width/2, y, 90,30)
-        rect(x3,y3-(barrier.height/2+200),50,600)
-        rect(x3,y3+(barrier.height/2+200),50,600)
+        rect(x3,y3-(barrier.height/2+200),50,400)
+        rect(x3,y3+(barrier.height/2+200),50,400)
         #image(barrier,x3,y3-(barrier.height/2+100),200,400)
         #image(barrier,x3,y3+(barrier.height/2+100),200,400)
         if x3<0:
@@ -47,12 +47,15 @@ def draw():
             x3 = width
         if x3  == width/2:
             pass
-        if (y > height or y < 0 or abs(width/2-x3)<25) and (abs(y-y3)>100 ):
+        if (y + height or y < 0 or abs(width/2-x3)<50) and (abs(y-y3)>200 ):
             game = 1
+            print('game')
         x3 -= 6
         vertical += 1
         y += vertical
         x2 -= 1 
+        if x2 == -2*bg.width:
+            x2 = 0
     else:
         background(0)
 def keyPressed():
@@ -63,4 +66,4 @@ def mousePressed():
     global game, x , score
     y = height/2
     vertical = -15
-    game, x , score = 0,0,0
+    #game, x , score = 0,0,0
